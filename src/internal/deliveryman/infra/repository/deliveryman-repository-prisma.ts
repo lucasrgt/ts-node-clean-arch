@@ -2,11 +2,12 @@ import { PrismaClient } from "@prisma/client";
 import { Result } from "../../../../pkg/util/result";
 import { Deliveryman } from "../../domain/entity/deliveryman";
 import { DeliverymanRepository } from "../../domain/repository/deliveryman-repository";
+import { DeliverymanModel } from "../model/deliveryman-model";
 
 export class DeliverymanRepositoryPrisma implements DeliverymanRepository {
   constructor(private prisma: PrismaClient) {}
 
-  async save(deliveryman: Deliveryman): Promise<Result<void>> {
+  async save(deliveryman: Deliveryman): Promise<Result<string>> {
     try {
       const deliverymanModel = DeliverymanModel.fromEntity(deliveryman);
 
@@ -25,7 +26,7 @@ export class DeliverymanRepositoryPrisma implements DeliverymanRepository {
     }
   }
 
-  update(id: string, deliveryman: Deliveryman): Promise<Result<void>> {
+  update(id: string, deliveryman: Deliveryman): Promise<Result<string>> {
     throw new Error("Method not implemented.");
   }
 }
